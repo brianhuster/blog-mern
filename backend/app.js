@@ -1,13 +1,9 @@
-const dotenv = require("dotenv");
-dotenv.config();
-
-const express = require("express");
-const bodyParser = require("body-parser");
-const morgan = require("morgan");
-
-const connectMongodb = require("./init/mongodb");
 const { authRoute } = require("./routes");
 const { errorHandler } = require("./middlewares");
+const express = require("express");
+const { connectMongodb } = require("./init/mongodb");
+const morgan = require("morgan");
+const bodyParser = require("body-parser");
 
 // init app
 const app = express();
@@ -24,9 +20,9 @@ app.use(morgan("dev"));
 app.use("/api/v1/auth", authRoute);
 
 app.get("/", (req, res) => {
-  res
-    .status(200)
-    .json({ code: 200, status: true, message: "Server is running." });
+    res
+        .status(200)
+        .json({ code: 200, status: true, message: "Server is running." });
 });
 
 app.use("*", (req, res) => {

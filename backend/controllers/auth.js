@@ -1,6 +1,7 @@
 const {User} = require("../models");
 const hashPassword = require("../utils/hashPassword");
 const comparePassword = require("../utils/comparePassword");
+const generateToken = require("../utils/generateToken");
 
 const signup = async (req, res, next) => {
     try{
@@ -49,10 +50,18 @@ const signin = async (req, res, next) => {
                 message: "Email or password is wrong"
             });
         }
+
+        const token = generateToken(user);
+
+        res.cookie("token", token, {httpOnly: true});
+
         res.status(200).json({
             code: 200,
             status: true,
-            message: "Signin successfully"
+            message: "Signin successfully",
+            data: {
+                token
+            }
         });
     } catch(error) {
         next(error);

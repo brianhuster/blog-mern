@@ -11,4 +11,4 @@ const connectMongodb = async () => {
     }
 }
 
-module.exports = connectMongodb;
+module.exports = { connectMongodb };

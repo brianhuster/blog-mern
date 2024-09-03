@@ -10,7 +10,7 @@ const generateToken = (user) => {
             role: user.role
         },
         JWT_SCERET,
-        { expiresIn: '1h' }
+        { expiresIn: '7d' }
     );
     return token;
 }
